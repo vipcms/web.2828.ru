@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Базовый CSS с темой</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="light">
+  <div class="container space-y-6">
+    <header class="text-center space-y-2">
+      <h1 class="text-xl font-bold">Базовый CSS с переменными</h1>
+      <p class="muted">Темная/светлая тема. Можешь переключить.</p>
+      <button id="theme-toggle" class="btn mt-2">Переключить тему</button>
+    </header>
+
+    <section class="card">
+      <h2 class="text-lg font-semibold mb-2">Текстовые элементы</h2>
+      <p>Пример абзаца текста с <strong>жирным</strong>, <em>курсивом</em> и <a href="#">ссылкой</a>.</p>
+      <blockquote>Это пример цитаты. Она выделена и легко читается.</blockquote>
+      <small class="muted">Мелкий текст — например, подпись или дата.</small>
+    </section>
+
+    <section class="card">
+      <h2 class="text-lg font-semibold mb-2">Списки</h2>
+      <ul>
+        <li>Пункт списка 1</li>
+        <li>Пункт списка 2</li>
+        <li>Пункт списка 3</li>
+      </ul>
+      <ol>
+        <li>Первый пункт</li>
+        <li>Второй пункт</li>
+        <li>Третий пункт</li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h2 class="text-lg font-semibold mb-2">Формы</h2>
+      <form class="space-y-4">
+        <div class="form-group">
+          <label for="name">Имя</label>
+          <input type="text" id="name" placeholder="Введите имя" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="example@email.com" />
+        </div>
+        <div class="form-group">
+          <label for="message">Сообщение</label>
+          <textarea id="message" rows="4" placeholder="Введите сообщение"></textarea>
+        </div>
+        <div class="form-group">
+          <select>
+            <option>Выберите вариант</option>
+            <option>Вариант 1</option>
+            <option>Вариант 2</option>
+          </select>
+        </div>
+        <button type="submit" class="btn">Отправить</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2 class="text-lg font-semibold mb-2">Кнопки</h2>
+      <button class="btn">Основная кнопка</button>
+      <button class="btn" disabled>Заблокированная кнопка</button>
+    </section>
+
+    <section class="card">
+      <h2 class="text-lg font-semibold mb-2">Оповещения</h2>
+      <div class="alert alert-success">Успешное действие!</div>
+      <div class="alert alert-error">Ошибка при отправке формы.</div>
+    </section>
+
+    <section class="card">
+      <h2 class="text-lg font-semibold mb-2">Таблицы</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Имя</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Александр</td>
+            <td>alex@example.com</td>
+          </tr>
+          <tr>
+            <td>Мария</td>
+            <td>maria@example.com</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer class="text-center muted text-sm">
+      &copy; 2025 Базовый CSS шаблон
+    </footer>
+  </div>
+
+  <script src="script.js" defer></script>
