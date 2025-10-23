@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Базовый CSS для HTML5</title>
+  <style>
+    /* Reset и универсальные стили */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      font-size: 16px;
+      line-height: 1.5;
+      -webkit-text-size-adjust: 100%;
+      -webkit-font-smoothing: antialiased;
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      color: #333;
+      background-color: #f9f9f9;
+      padding: 1rem;
+      min-height: 100vh;
+    }
+
+    a {
+      color: #0077cc;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    img {
+      max-width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      line-height: 1.2;
+    }
+
+    p {
+      margin-bottom: 1rem;
+    }
+
+    ul, ol {
+      margin-bottom: 1rem;
+      padding-left: 1.5rem;
+    }
+
+    li {
+      margin-bottom: 0.3rem;
+    }
+
+    hr {
+      margin: 1rem 0;
+      border: none;
+      border-top: 1px solid #ddd;
+    }
+
+    blockquote {
+      margin: 1rem 0;
+      padding-left: 1rem;
+      border-left: 4px solid #0077cc;
+      color: #555;
+      font-style: italic;
+    }
+
+    pre {
+      background-color: #f1f1f1;
+      padding: 1rem;
+      overflow-x: auto;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      font-family: monospace;
+      white-space: pre-wrap;
+    }
+
+    code {
+      font-family: monospace;
+      background-color: #eee;
+      padding: 0.2em 0.4em;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+
+    small {
+      font-size: 0.85em;
+    }
+
+    strong {
+      font-weight: bold;
+    }
+
+    em {
+      font-style: italic;
+    }
+
+    abbr {
+      text-decoration: none;
+      cursor: help;
+      border-bottom: 1px dotted #666;
+    }
+
+    input, textarea, select, button {
+      font-size: 1rem;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+      width: 100%;
+      margin-bottom: 1rem;
+      box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+      transition: border-color 0.3s ease;
+    }
+
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: #0077cc;
+      box-shadow: 0 0 0 2px rgba(0, 119, 204, 0.2);
+    }
+
+    button {
+      background-color: #0077cc;
+      color: #fff;
+      cursor: pointer;
+      text-align: center;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #005fa3;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-bottom: 1rem;
+    }
+
+    th, td {
+      padding: 0.6rem;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f5f5f5;
+    }
+
+    caption {
+      caption-side: top;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+
+    fieldset {
+      border: 1px solid #ccc;
+      padding: 1rem;
+      margin-bottom: 1rem;
+      border-radius: 4px;
+    }
+
+    legend {
+      padding: 0.2rem 0.6rem;
+      font-weight: bold;
+      background: #fff;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    figure {
+      margin: 1rem 0;
+    }
+
+    figcaption {
+      font-size: 0.9rem;
+      text-align: center;
+      color: #666;
+      margin-top: 0.5rem;
+    }
+
+    /* Адаптивность */
+    @media (min-width: 600px) {
+      body {
+        padding: 2rem;
+        max-width: 800px;
+        margin: 0 auto;
+      }
+    }
+
+    .container {
+      max-width: 100%;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.5rem 1rem;
+      background-color: #0077cc;
+      color: #fff;
+      text-decoration: none;
+      border-radius: 4px;
+      transition: background-color 0.3s ease;
+    }
+
+    .btn:hover {
+      background-color: #005fa3;
+    }
+
+    .card {
+      background: #fff;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+      margin-bottom: 1rem;
+    }
+
+    .form-group {
+      margin-bottom: 1rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+
+    .alert {
+      padding: 0.75rem 1rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .alert-success {
+      background-color: #d4edda;
+      color: #155724;
+      border-left: 4px solid #c3e6cb;
+    }
+
+    .alert-error {
+      background-color: #f8d7da;
+      color: #721c24;
+      border-left: 4px solid #f5c6c9;
+    }
+
+    .text-center {
+      text-align: center;
+    }
+
+    .text-right {
+      text-align: right;
+    }
+
+    .text-left {
+      text-align: left;
+    }
+
+    .bold {
+      font-weight: bold;
+    }
+
+    .italic {
+      font-style: italic;
+    }
+
+    .muted {
+      color: #888;
+    }
+
+    .space-y-2 > * + * {
+      margin-top: 0.5rem;
+    }
+
+    .space-y-4 > * + * {
+      margin-top: 1rem;
+    }
+
+    .space-y-6 > * + * {
+      margin-top: 1.5rem;
+    }
+
+    .mt-2 {
+      margin-top: 0.5rem;
+    }
+
+    .mb-2 {
+      margin-bottom: 0.5rem;
+    }
+
+    .p-2 {
+      padding: 0.5rem;
+    }
+
+    .rounded {
+      border-radius: 4px;
+    }
+
+    .shadow {
+      box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+    }
+
+    .bg-white {
+      background-color: #fff;
+    }
+
+    .text-lg {
+      font-size: 1.25rem;
+    }
+
+    .text-xl {
+      font-size: 1.5rem;
+    }
+
+    .font-bold {
+      font-weight: bold;
+    }
+
+    .font-semibold {
+      font-weight: 600;
+    }
+
+    .capitalize {
+      text-transform: capitalize;
+    }
+
+    .uppercase {
+      text-transform: uppercase;
+    }
+
+    .lowercase {
+      text-transform: lowercase;
+    }
+
+    .no-underline {
+      text-decoration: none;
+    }
+
+    .flex {
+      display: flex;
+    }
+
+    .flex-col {
+      flex-direction: column;
+    }
+
+    .items-center {
+      align-items: center;
+    }
+
+    .justify-between {
+      justify-content: space-between;
+    }
+
+    .w-full {
+      width: 100%;
+    }
+
+    .max-w-xs {
+      max-width: 20rem;
+    }
+
+    .max-w-sm {
+      max-width: 24rem;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .visible {
+      visibility: visible;
+    }
+
+    .invisible {
+      visibility: hidden;
+    }
+
+    .opacity-0 {
+      opacity: 0;
+    }
+
+    .opacity-100 {
+      opacity: 1;
+    }
+
+    .transition-opacity {
+      transition: opacity 0.3s ease;
+    }
+
+    .animate-pulse {
+      animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+
+    .loading-spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 2px solid #0077cc;
+      border-top-color: transparent;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+  </style>
+</head>
+<body>
+  <div class="container space-y-6">
+    <header class="text-center space-y-2">
+      <h1 class="text-xl font-bold">Базовый CSS для HTML5</h1>
+      <p class="muted">Универсальный стиль для мобильных устройств</p>
+    </header>
+
+    <section class="card">
+      <h2 class="text-lg font-semibold mb-2">Текстовые элементы</h2>
+      <p>Пример абзаца текста с <strong>жирным</strong>, <em>курсивом</em> и <a href="#">ссылкой</a>.</p>
+      <blockquote>Это пример цитаты. Она выделена и легко читается.</blockquote>
+      <small class="muted">Мелкий текст — например, подпись или дата.</small>
+    </section>
+
+    <section class="card">
+      <h2 class="text-lg font-semibold mb-2">Списки</h2>
+      <ul>
+        <li>Пункт списка 1</li>
+        <li>Пункт списка 2</li>
+        <li>Пункт списка 3</li>
+      </ul>
+      <ol>
+        <li>Первый пункт</li>
+        <li>Второй пункт</li>
+        <li>Третий пункт</li>
+      </ol>
+    </section>
+
+    <section class="card">
+      <h2 class="text-lg font-semibold mb-2">Формы</h2>
+      <form class="space-y-4">
+        <div class="form-group">
+          <label for="name">Имя</label>
+          <input type="text" id="name" placeholder="Введите имя" />
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" placeholder="example@email.com" />
+        </div>
+        <div class="form-group">
+          <label for="message">Сообщение</label>
+          <textarea id="message" rows="4" placeholder="Введите сообщение"></textarea>
+        </div>
+        <div class="form-group">
+          <select>
+            <option>Выберите вариант</option>
+            <option>Вариант 1</option>
+            <option>Вариант 2</option>
+          </select>
+        </div>
+        <button type="submit" class="btn">Отправить</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2 class="text-lg font-semibold mb-2">Кнопки</h2>
+      <button class="btn">Основная кнопка</button>
+      <button class="btn" disabled>Заблокированная кнопка</button>
+    </section>
+
+    <section class="card">
+      <h2 class="text-lg font-semibold mb-2">Оповещения</h2>
+      <div class="alert alert-success">Успешное действие!</div>
+      <div class="alert alert-error">Ошибка при отправке формы.</div>
+    </section>
+
+    <section class="card">
+      <h2 class="text-lg font-semibold mb-2">Таблицы</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Имя</th>
+            <th>Email</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Александр</td>
+            <td>alex@example.com</td>
+          </tr>
+          <tr>
+            <td>Мария</td>
+            <td>maria@example.com</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <footer class="text-center muted text-sm">
+      &copy; 2025 Базовый CSS шаблон
+    </footer>
+  </div>
+</body>
+</html>
