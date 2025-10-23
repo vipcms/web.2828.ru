@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CMS Editor</title>
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #2c2c2c;
+            --accent-color: #ff6b35;
+            --text-color: #fff;
+            --border-color: #4a4a4a;
+            --shadow-color: rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: var(--primary-color);
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .editor {
+            width: 100%;
+            max-width: 600px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px var(--shadow-color);
+            transition: transform 0.3s;
+        }
+
+        .editor:hover {
+            transform: translateY(-5px);
+        }
+
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+            gap: 10px;
+            padding: 20px;
+            background: var(--primary-color);
+        }
+
+        .control-button {
+            height: 70px;
+            background: var(--primary-color);
+            color: var(--text-color);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 20px;
+            text-align: center;
+            line-height: 70px;
+            transition: all 0.2s;
+        }
+
+        .control-button:hover {
+            background: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        .control-button.accent {
+            background: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        .content-area {
+            padding: 20px;
+            background: #333;
+            color: var(--text-color);
+            font-size: 16px;
+            border-top: 1px solid var(--border-color);
+        }
+
+        @media (max-width: 600px) {
+            .controls {
+                grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="editor">
+        <div class="controls">
+            <button class="control-button" onclick="handleControl('HTML')">HTML</button>
+            <button class="control-button" onclick="handleControl('CSS')">CSS</button>
+            <button class="control-button" onclick="handleControl('TXT')">TXT</button>
+            <button class="control-button" onclick="handleControl('JS')">JS</button>
+            <button class="control-button" onclick="handleControl('PHP')">PHP</button>
+            <button class="control-button" onclick="handleControl('SQL')">SQL</button>
+            <button class="control-button" onclick="handleControl('TAG')">TAG</button>
+            <button class="control-button" onclick="handleControl('TITLE')">TITLE</button>
+            <button class="control-button" onclick="handleControl('URL')">URL</button>
+            <button class="control-button" onclick="handleControl('KEYWORDS')">KEYWORDS</button>
+            <button class="control-button" onclick="handleControl('DESCRIPTION')">DESCRIPTION</button>
+            <button class="control-button accent" onclick="saveContent()">SAVE</button>
+        </div>
+        <div class="content-area">
+            <textarea id="content" rows="10" cols="50" placeholder="Enter your content here..."></textarea>
+        </div>
+    </div>
+
+    <script>
+        function handleControl(type) {
+            const content = document.getElementById('content');
+            content.value += `<!-- ${type} -->\n`;
+        }
+
+        function saveContent() {
+            const content = document.getElementById('content').value;
+            alert("Content saved:\n" + content);
+            // Здесь можно добавить AJAX для сохранения данных
+        }
+    </script>
+</body>
+</html>
