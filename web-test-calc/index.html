@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Calculator</title>
+    <style>
+        /* CSS Variables */
+        :root {
+            --primary-color: #2c2c2c;
+            --accent-color: #ff6b35;
+            --text-color: #fff;
+            --border-color: #4a4a4a;
+            --shadow-color: rgba(0, 0, 0, 0.2);
+        }
+
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: var(--primary-color);
+            font-family: 'Segoe UI', sans-serif;
+        }
+
+        .calculator {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px var(--shadow-color);
+            transition: transform 0.3s;
+        }
+
+        .calculator:hover {
+            transform: translateY(-5px);
+        }
+
+        .display {
+            height: 120px;
+            background: var(--primary-color);
+            color: var(--text-color);
+            font-size: 40px;
+            text-align: right;
+            padding: 20px;
+            border-bottom: 1px solid var(--border-color);
+            position: relative;
+        }
+
+        .display span {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            color: #aaa;
+            font-size: 24px;
+        }
+
+        .keypad {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2px;
+            padding: 10px;
+        }
+
+        .button {
+            height: 70px;
+            background: var(--primary-color);
+            color: var(--text-color);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 24px;
+            transition: all 0.2s;
+        }
+
+        .button.operator {
+            color: var(--accent-color);
+        }
+
+        .button.accent {
+            background: var(--accent-color);
+            color: var(--primary-color);
+        }
+
+        .button:active {
+            transform: scale(0.95);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        @media (max-width: 600px) {
+            .calculator {
+                transform: scale(0.9);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display">
+            <span id="history"></span>
+            <input type="text" id="screen" value="0" readonly>
+        </div>
+        <div class="keypad">
+            <button class="button accent" onclick="clearAll()">AC</button>
+            <button class="button operator" onclick="append('%')">%</button>
+            <button class="button operator" onclick="append('/')">÷</button>
+            <button class="button" onclick="append('7')">7</button>
+            <button class="button" onclick="append('8')">8</button>
+            <button class="button" onclick="append('9')">9</button>
+            <button class="button operator" onclick="append('*')">×</button>
+            <button class="button" onclick="append('4')">4</button>
+            <button class="button" onclick="append('5')">5</button>
+            <button class="button" onclick="append('6')">6</button>
+            <button class="button operator" onclick="append('-')">-</button>
+            <button class="button" onclick="append('1')">1</button>
+            <button class="button" onclick="append('2')">2</button>
+            <button class="button" onclick="append('3')">3</button>
+            <button class="button operator" onclick="append('+')">+</button>
+            <button class="button" onclick="append('0')">0</button>
+            <button class="button" onclick="append('.')">.</button>
+            <button class="button operator accent" onclick="calculate()">=</button>
+        </div>
+    </div>
+
+    <script>
+        let screen = document.getElementById('screen');
+        let historyElement = document.getElementById('history');
+
+        function append(value) {
+            if (screen.value === '0' && value !== '.') {
+                screen.value = value;
+            } else {
+                screen.value += value;
+            }
+        }
+
+        function clearAll() {
+            screen.value = '0';
+            historyElement.textContent = '';
+        }
+
+        function calculate() {
+            try {
+                let result = eval(screen.value);
+                historyElement.textContent = screen.value + ' =';
+                screen.value = result;
+            } catch (error) {
+                screen.value = 'Error';
+            }
+        }
+
+        // Add event listeners for keyboard input
+        document.addEventListener('keydown', function(event) {
+            if (/^[0-9+\-*/.%]$/.test(event.key)) {
+                append(event.key);
+            } else if (event.key === 'Enter') {
+                calculate();
+            } else if (event.key === 'Escape') {
+                clearAll();
+            }
+        });
+    </script>
+</body>
+</html>
