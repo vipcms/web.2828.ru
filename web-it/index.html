@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Алексей Смирнов — Инженер-программист</title>
+  <script>
+    // Обработка навигации без фреймворков
+    document.addEventListener('DOMContentLoaded', () => {
+      const sections = document.querySelectorAll('.section');
+      const navLinks = document.querySelectorAll('.nav-link');
+
+      function showSection(id) {
+        sections.forEach(section => {
+          section.classList.add('hidden');
+        });
+        document.getElementById(id).classList.remove('hidden');
+      }
+
+      navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
+          e.preventDefault();
+          const target = link.getAttribute('data-target');
+          showSection(target);
+
+          navLinks.forEach(l => l.classList.remove('text-indigo-600', 'font-semibold'));
+          link.classList.add('text-indigo-600', 'font-semibold');
+        });
+      });
+
+      // Показать начальную секцию
+      showSection('about');
+    });
+  </script>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      margin: 0;
+      background-color: #f9fafb;
+      color: #111827;
+    }
+    header {
+      background-color: white;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
+    .container {
+      max-width: 960px;
+      margin: auto;
+      padding: 2rem;
+    }
+    .nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+    .nav a {
+      text-decoration: none;
+      color: #4b5563;
+      transition: all 0.2s ease-in-out;
+      font-weight: 500;
+    }
+    .nav a:hover {
+      color: #4f46e5;
+    }
+    h1, h2 {
+      color: #374151;
+    }
+    .section {
+      margin-bottom: 3rem;
+    }
+    .card {
+      background-color: white;
+      border-radius: 0.5rem;
+      padding: 1.5rem;
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+      margin-bottom: 1.5rem;
+      transition: transform 0.2s ease-in-out;
+    }
+    .card:hover {
+      transform: translateY(-4px);
+    }
+    .project-title {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+    .project-desc {
+      font-size: 0.95rem;
+      color: #4b5563;
+    }
+    footer {
+      background-color: #1f2937;
+      color: #d1d5db;
+      text-align: center;
+      padding: 1.5rem;
+    }
+    @media (max-width: 768px) {
+      .nav {
+        flex-direction: column;
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container flex justify-between items-center">
+      <h1 class="text-2xl font-bold text-indigo-600">Алексей Смирнов</h1>
+      <nav>
+        <ul class="nav">
+          <li><a href="#" class="nav-link" data-target="about">Обо мне</a></li>
+          <li><a href="#" class="nav-link" data-target="education">Образование</a></li>
+          <li><a href="#" class="nav-link" data-target="experience">Опыт</a></li>
+          <li><a href="#" class="nav-link" data-target="projects">Проекты</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="container">
+    
+    <!-- About Section -->
+    <section id="about" class="section">
+      <h2 class="text-xl font-semibold mb-4">Обо мне</h2>
+      <p class="mb-4">
+        Привет! Меня зовут Алексей Смирнов. Я инженер-программист с более чем 5-летним опытом разработки веб-приложений и backend-систем.
+      </p>
+      <p>
+        Увлекаюсь созданием масштабируемых решений, автоматизацией процессов и оптимизацией производительности. Мои основные навыки включают JavaScript, React, Node.js, Python и облачные технологии.
+      </p>
+    </section>
+
+    <!-- Education Section -->
+    <section id="education" class="section hidden">
+      <h2 class="text-xl font-semibold mb-4">Образование</h2>
+      <div class="card">
+        <h3 class="text-lg font-medium">Московский Технический Университет</h3>
+        <p class="text-gray-600">Бакалавр Информационных Технологий</p>
+        <p class="text-sm text-gray-500">2015–2019</p>
+      </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section hidden">
+      <h2 class="text-xl font-semibold mb-4">Опыт работы</h2>
+      <div class="card">
+        <h3 class="text-lg font-medium">Инженер-программист</h3>
+        <p class="text-gray-600">TechCorp, Москва</p>
+        <p class="text-sm text-gray-500">2020 – настоящее время</p>
+        <p class="mt-2 text-sm">
+          Разработка и поддержка высоконагруженных backend-сервисов на Node.js, оптимизация баз данных, внедрение CI/CD пайплайнов.
+        </p>
+      </div>
+      <div class="card">
+        <h3 class="text-lg font-medium">Frontend-разработчик</h3>
+        <p class="text-gray-600">WebSolutions LLC</p>
+        <p class="text-sm text-gray-500">2018 – 2020</p>
+        <p class="mt-2 text-sm">
+          Создание пользовательских интерфейсов с использованием React, работа с REST API, написание unit- и интеграционных тестов.
+        </p>
+      </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="section hidden">
+      <h2 class="text-xl font-semibold mb-4">Проекты</h2>
+      <div class="card">
+        <h3 class="project-title">Система управления задачами</h3>
+        <p class="project-desc">
+          Веб-приложение для управления задачами команды, реализованное с помощью React + Node.js. Поддерживает доски Kanban, уведомления и аналитику.
+        </p>
+      </div>
+      <div class="card">
+        <h3 class="project-title">API для онлайн-платежей</h3>
+        <p class="project-desc">
+          Backend-сервис на Python (FastAPI), обеспечивающий безопасную обработку платежей через Stripe и PayPal.
+        </p>
+      </div>
+      <div class="card">
+        <h3 class="project-title">Сервис мониторинга производительности</h3>
+        <p class="project-desc">
+          Инструмент для отслеживания метрик серверов в реальном времени. Использовались Prometheus, Grafana и Docker.
+        </p>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Алексей Смирнов. Все права защищены.</p>
+  </footer>
