@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Telegram Bot API — Справочник</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 40px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        h1 {
+            text-align: center;
+            color: #2c3e50;
+        }
+        .search-box {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .search-box input {
+            width: 60%;
+            padding: 10px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .filter-box {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .filter-box select {
+            padding: 8px;
+            font-size: 14px;
+        }
+        .section {
+            background: white;
+            padding: 20px;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: none;
+        }
+        .section.show {
+            display: block;
+        }
+        .category-label {
+            float: right;
+            font-size: 12px;
+            background: #3498db;
+            color: white;
+            padding: 3px 8px;
+            border-radius: 5px;
+        }
+        details {
+            margin-bottom: 10px;
+        }
+        summary {
+            font-weight: bold;
+            cursor: pointer;
+        }
+        pre {
+            background: #f1f1f1;
+            padding: 10px;
+            overflow-x: auto;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+<h1>Telegram Bot API — Справочник</h1>
+
+<div class="search-box">
+    <input type="text" id="searchInput" placeholder="Поиск по названию или описанию...">
+</div>
+
+<div class="filter-box">
+    <label for="categoryFilter">Фильтр по категории:</label>
+    <select id="categoryFilter">
+        <option value="">Все</option>
+        <option value="Сообщения">Сообщения</option>
+        <option value="Файлы">Файлы</option>
+        <option value="Кнопки">Кнопки</option>
+        <option value="Обновления">Обновления</option>
+        <option value="Методы">Методы</option>
+    </select>
+</div>
+
+<!-- Section: Получение обновлений -->
+<div class="section" data-category="Обновления" data-keywords="update update_id message edited_message callback_query inline_query poll webhook getUpdates">
+    <h2>? Получение обновлений</h2>
+    <span class="category-label">Обновления</span>
+    <details>
+        <summary>Подробнее</summary>
+        <p><strong>Telegram передаёт обновления двумя способами:</strong></p>
+        <ul>
+            <li><strong>Webhook</strong> — POST-запрос на ваш URL</li>
+            <li><strong>getUpdates</strong> — вы сами запрашиваете список обновлений</li>
+        </ul>
+        <pre>$update = json_decode(file_get_contents('php://input'), true);</pre>
+    </details>
+</div>
+
+<!-- Section: Структура Update -->
+<div class="section" data-category="Обновления" data-keywords="update message chat user entities">
+    <h2>? Структура объекта $update</h2>
+    <span class="category-label">Обновления</span>
+    <details>
+        <summary>Поля объекта</summary>
+        <ul>
+            <li><code>update_id</code> — ID обновления</li>
+            <li><code>message</code> — входящее сообщение</li>
+            <li><code>callback_query</code> — нажатие кнопки</li>
+            <li><code>inline_query</code> — inline-поиск</li>
+        </ul>
+    </details>
+</div>
+
+<!-- Section: Отправка сообщений -->
+<div class="section" data-category="Сообщения" data-keywords="sendMessage sendPhoto sendAudio sendVideo sendDocument editMessageText deleteMessage">
+    <h2>? Отправка сообщений</h2>
+    <span class="category-label">Сообщения</span>
+    <details>
+        <summary>Доступные методы</summary>
+        <ul>
+            <li><code>sendMessage</code> — текстовое сообщение</li>
+            <li><code>sendPhoto</code> — фото</li>
+            <li><code>sendDocument</code> — документ</li>
+            <li><code>editMessageText</code> — редактирование</li>
+        </ul>
+        <pre>file_get_contents("https://api.telegram.org/bot$token/sendMessage?chat_id=$chatId&text=Привет");</pre>
+    </details>
+</div>
+
+<!-- Section: Прием файлов -->
+<div class="section" data-category="Файлы" data-keywords="getFile file_path photo document audio video download">
+    <h2>? Приём файлов</h2>
+    <span class="category-label">Файлы</span>
+    <details>
+        <summary>Как получить файл</summary>
+        <ol>
+            <li>Получите <code>file_id</code> из сообщения</li>
+            <li>Запросите путь через <code>getFile</code></li>
+            <li>Скачайте файл по ссылке</li>
+        </ol>
+        <pre>$fileUrl = "https://api.telegram.org/file/bot$token/$filePath";</pre>
+    </details>
+</div>
+
+<!-- Section: Кнопки -->
+<div class="section" data-category="Кнопки" data-keywords="inline_keyboard reply_keyboard callback_data answerCallbackQuery">
+    <h2>? Инлайновые и обычные кнопки</h2>
+    <span class="category-label">Кнопки</span>
+    <details>
+        <summary>Использование</summary>
+        <ul>
+            <li><code>inline_keyboard</code> — инлайновые кнопки</li>
+            <li><code>reply_keyboard</code> — клавиатура бота</li>
+            <li><code>callback_data</code> — обработка кликов</li>
+        </ul>
+        <pre>'reply_markup' => json_encode([
+    'inline_keyboard' => [
+        [['text' => 'Нажми', 'callback_data' => 'click']]
+    ]
+])</pre>
+    </details>
+</div>
+
+<!-- Section: Дополнительные методы -->
+<div class="section" data-category="Методы" data-keywords="setWebhook getMe setMyCommands answerCallbackQuery">
+    <h2>?️ Дополнительные методы</h2>
+    <span class="category-label">Методы</span>
+    <details>
+        <summary>Часто используемые методы</summary>
+        <ul>
+            <li><code>setWebhook</code> — установить webhook</li>
+            <li><code>getMe</code> — получить данные о боте</li>
+            <li><code>setMyCommands</code> — установить команды</li>
+            <li><code>answerCallbackQuery</code> — ответ на кнопку</li>
+        </ul>
+    </details>
+</div>
+
+<script>
+    const sections = document.querySelectorAll('.section');
+    const searchInput = document.getElementById('searchInput');
+    const categoryFilter = document.getElementById('categoryFilter');
+
+    function filterSections() {
+        const query = searchInput.value.toLowerCase();
+        const category = categoryFilter.value;
+
+        sections.forEach(section => {
+            const keywords = section.dataset.keywords.toLowerCase();
+            const sectionCategory = section.dataset.category;
+
+            const matchesSearch = !query || keywords.includes(query);
+            const matchesCategory = !category || sectionCategory === category;
+
+            if (matchesSearch && matchesCategory) {
+                section.classList.add('show');
+            } else {
+                section.classList.remove('show');
+            }
+        });
+    }
+
+    searchInput.addEventListener('input', filterSections);
+    categoryFilter.addEventListener('change', filterSections);
+
+    // Показать все при загрузке
+    window.onload = () => {
+        sections.forEach(s => s.classList.add('show'));
+    };
+</script>
+
+</body>
+</html>
