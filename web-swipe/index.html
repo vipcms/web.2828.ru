@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"/>
+  <title>Clean Swipe Page</title>
+  <link rel="stylesheet" href="swipe.css" />
+</head>
+<body>
+
+  <div class="container" id="carousel">
+    <section class="screen fade-in">
+      <h1>Первый экран</h1>
+      <p>Это первый из трёх полноэкранных блоков. Перелистывайте вправо или влево.</p>
+    </section>
+    <section class="screen fade-in">
+      <h1>Главный экран</h1>
+      <p>Этот блок виден при загрузке. Он центральный и самый важный.</p>
+    </section>
+    <section class="screen fade-in">
+      <h1>Третий экран</h1>
+      <p>Последний блок. После него вы вернётесь к первому в цикле.</p>
+    </section>
+  </div>
+
+  <div class="dot-nav" id="dots">
+    <div class="dot"></div>
+    <div class="dot active"></div>
+    <div class="dot"></div>
+  </div>
+
+  <script src="swipe.js" defer></script>
